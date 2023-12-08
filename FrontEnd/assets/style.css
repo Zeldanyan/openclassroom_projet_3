@@ -28,6 +28,11 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+:root { /* variable*/
+	--green: #1D6154;
+	--font: "Syne";
+}
+
 body {
 	line-height: 1;
 }
@@ -82,7 +87,7 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
 }
 nav ul {
 	display: flex;
@@ -137,6 +142,35 @@ li:hover {
 	width: 100%;
 
 }
+
+/*menu filtre*/
+.menu ul {
+	display: flex;
+	justify-content: center;
+	margin: 51px;
+	gap: 10px;
+}
+
+.menu ul li {
+	border-radius: 60px;
+	border: 1px solid var(--green);
+	color: var(--green);
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 9px 10px;
+	font-family: var(--font);
+}
+
+.menu ul li.select {
+	color: white;
+	background-color: var(--green);
+}
+
+.menu ul li {
+	cursor: pointer;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
