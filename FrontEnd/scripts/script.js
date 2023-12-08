@@ -8,16 +8,17 @@ async function get_api(link) {
 }
 
 // function pour les projets
-async function works() {
-    let i = 0;
+async function f_work() {
+    const gallery = document.querySelector(".gallery");
     const work = await get_api("works");
-    console.log(work);
 
+    let i = 0;
     while (i < work.length) {
-        console.log(work[i].title);
+        gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
         i++;
     }
 }
 
+//doc api = http://localhost:5678/api-docs/
 const api = "http://localhost:5678/api/";
-works();
+f_work();
