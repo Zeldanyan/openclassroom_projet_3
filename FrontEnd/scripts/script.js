@@ -26,7 +26,7 @@ async function f_work(filtre) {
     gallery.innerHTML = ""
     i = 0;
     while (i < work.length) { 
-        if (filtre === null || filtre.value === 0) {
+        if (filtre === null || filtre.value === 0) { // category, tout les projets
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
         } else if (filtre.value === 1 && work[i].category.id === 1) { // category, id 1 = "Objets"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
