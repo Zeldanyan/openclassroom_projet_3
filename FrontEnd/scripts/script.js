@@ -15,8 +15,8 @@ async function f_work(filtre) {
     //maj class du filtre
     i = 0;
     if (filtre !== null) {
-        while (i < bouton_filtre.length) {
-            bouton_filtre[i].classList.remove("select");
+        while (i < btn_filtre.length) {
+            btn_filtre[i].classList.remove("select");
             i++;
         }
         filtre.classList.add("select");
@@ -39,18 +39,35 @@ async function f_work(filtre) {
     }
 }
 
+let i = 0;
 //doc api = http://localhost:5678/api-docs/
 const api = "http://localhost:5678/api/";
-const bouton_filtre = [
+const btn_filtre = [
     document.getElementById("menu_all"),
     document.getElementById("menu_objects"),
     document.getElementById("menu_apparts"),
     document.getElementById("menu_HR")
 ];
-let i = 0;
+const btn_log = document.getElementById("log");
+let token = window.localStorage.getItem("token");
+
 
 f_work(null);
-bouton_filtre[0].addEventListener("click", function() {f_work(bouton_filtre[0]);});
-bouton_filtre[1].addEventListener("click", function() {f_work(bouton_filtre[1]);});
-bouton_filtre[2].addEventListener("click", function() {f_work(bouton_filtre[2]);});
-bouton_filtre[3].addEventListener("click", function() {f_work(bouton_filtre[3]);});
+btn_filtre[0].addEventListener("click", function() {f_work(btn_filtre[0]);});
+btn_filtre[1].addEventListener("click", function() {f_work(btn_filtre[1]);});
+btn_filtre[2].addEventListener("click", function() {f_work(btn_filtre[2]);});
+btn_filtre[3].addEventListener("click", function() {f_work(btn_filtre[3]);});
+
+token = "test";
+
+if (token !== null) {
+    btn_log.textContent = "logout";
+    btn_log.href = "#";
+}
+
+btn_log.addEventListener("click", function() {
+    if (token !== null) {
+        window.localStorage.removeItem("token");
+        window.location.reload();
+    }
+})

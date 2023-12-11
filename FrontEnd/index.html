@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/4f7f02b5e2.js" crossorigin="anonymous"></script> <!-- icon -->
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="scripts/script.js" defer></script> <!-- inclure notre js dans html (defer pour différée le script) -->
 </head>
@@ -18,7 +19,7 @@
 		<ul>
 			<li><a href="#portfolio">projets<a></li>
 			<li><a href="#contact">contact</a></li>
-			<li><a href="login.html">login</a></li>
+			<li><a id="log" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -36,7 +37,10 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="header_portfolio">
+			<h2>Mes Projets</h2>
+			<a id="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
+		</div>
 		<div class="menu">
 			<ul>
 				<li id="menu_all" class="select" value="0">Tous</li>

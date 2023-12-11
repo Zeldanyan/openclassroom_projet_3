@@ -139,10 +139,25 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+.header_portfolio {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
+
+a#edit {
+	margin-left: 30px;
+}
+
+.fa-pen-to-square {
+	margin-right: 5px;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -253,6 +268,12 @@ main.login {
 	margin: 50px;
 }
 
+.login p#code_fail {
+	color: red;
+	font-weight: 800;
+	text-align: center;
+}
+
 .login form {
 	display: flex;
 	justify-content: center;
@@ -273,7 +294,7 @@ main.login {
 	border: none;
 }
 
-.login form input#login {
+.login form input#connect {
 	height: 36px;
 	margin: auto;
 }
