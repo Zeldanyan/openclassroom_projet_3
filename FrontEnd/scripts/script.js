@@ -50,7 +50,9 @@ const btn_filtre = [
 ];
 const btn_log = document.getElementById("log");
 let token = window.localStorage.getItem("token");
-
+const btn_edit = document.getElementById("edit");
+const popup_edit = document.getElementById("window_edit");
+token = "test";
 
 f_work(null);
 btn_filtre[0].addEventListener("click", function() {f_work(btn_filtre[0]);});
@@ -58,16 +60,26 @@ btn_filtre[1].addEventListener("click", function() {f_work(btn_filtre[1]);});
 btn_filtre[2].addEventListener("click", function() {f_work(btn_filtre[2]);});
 btn_filtre[3].addEventListener("click", function() {f_work(btn_filtre[3]);});
 
-token = "test";
-
 if (token !== null) {
     btn_log.textContent = "logout";
     btn_log.href = "#";
+    btn_edit.style.display = "flex";
 }
 
+// log out
 btn_log.addEventListener("click", function() {
     if (token !== null) {
         window.localStorage.removeItem("token");
         window.location.reload();
     }
+});
+
+// ouvrir la fenetre modal
+btn_edit.addEventListener("click", function() {
+    popup_edit.style.display = "flex";
+});
+
+//fermer la fenetre modale
+document.querySelector(".close").addEventListener("click", function() {
+    popup_edit.style.display = "none";
 })
