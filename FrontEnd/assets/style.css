@@ -257,7 +257,6 @@ footer nav ul {
 .window_edit {
 	position: fixed;
 	display: none;
-	/*display: flex;*/
 	align-items: center;
 	justify-content: center;
 	top: 0;
@@ -265,24 +264,64 @@ footer nav ul {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.6);
-  }
+}
   
-  .edit_content {
+.window_edit .edit_content {
+	justify-content: center;
 	position: relative;
 	background-color: white;
 	overflow: auto;
-	width: 635px;
-	height: 700px;
-	max-width: 65%;
-	max-height: 90%;
+	width: 570px;
+	height: 688px;
 	border-radius: 10px;
-  }
+}
 
-  .close {
+.window_edit .close {
+	display: flex;
+	justify-content: center;
 	float: right;
-	margin: 8px 10px;
-	font-size: 25px;
-  }
+	width: 24px;
+	height: 24px;
+	font-size: 20px;
+	margin: 26px 30px 0 0;
+}
+
+.window_edit .back {
+	display: flex;
+	justify-content: center;
+	float: left;
+	width: 24px;
+	height: 24px;
+	font-size: 20px;
+	margin: 25px 0 0 30px;
+}
+
+.window_edit h3 {
+	margin: 60px 0 36px 0;
+	color: black;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-weight: 400;
+}
+
+.window_edit .mini_work {
+	
+}
+
+.window_edit .button_module {
+	display: block;
+	margin: 36px auto 45px auto;
+	font-size: 14px;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+	border-radius: 60px;
+	height: 36px;
+	width: 236px;
+}
 
 /*------------------------------------------------------------*\
 |						LOGIN.HTML								\
