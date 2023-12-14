@@ -271,7 +271,7 @@ footer nav ul {
 	position: relative;
 	background-color: white;
 	overflow: auto;
-	width: 570px;
+	width: 630px;
 	height: 688px;
 	border-radius: 10px;
 }
@@ -306,7 +306,22 @@ footer nav ul {
 }
 
 .window_edit .mini_work {
-	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-content: flex-start;
+	gap: 2%;
+	margin: 0 105px;
+	height: 443px;
+	border-bottom: 1px solid #B3B3B3;
+	overflow: auto;
+}
+
+.window_edit .mini_card {
+	height: 110px;
+	width: 18%;
+	background-color: rgb(119, 119, 119);
+	margin-bottom: 25px;
 }
 
 .window_edit .button_module {
