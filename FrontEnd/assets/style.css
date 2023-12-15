@@ -322,6 +322,7 @@ footer nav ul {
 	width: 18%;
 	background-color: rgb(119, 119, 119);
 	margin-bottom: 25px;
+	background-size: cover;
 }
 
 .window_edit .button_module {
@@ -336,6 +337,24 @@ footer nav ul {
 	border-radius: 60px;
 	height: 36px;
 	width: 236px;
+}
+
+.window_edit .trash {
+	background-color: black;
+	float: right;
+	height: 17px;
+	width: 17px;
+	display: flex;
+	justify-content: center;
+	margin: 6px 6px 0 0;
+	align-items: center;
+	border-radius: 2px;
+}
+
+.window_edit .trash i {
+	display: contents;
+	color: white;
+	font-size: 11px;
 }
 
 /*------------------------------------------------------------*\

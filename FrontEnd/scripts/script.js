@@ -13,8 +13,8 @@ async function f_work(filtre) {
     const work = await get_api("works");
 
     //maj class du filtre
-    i = 0;
     if (filtre !== null) {
+        i = 0;
         while (i < btn_filtre.length) {
             btn_filtre[i].classList.remove("select");
             i++;
@@ -35,6 +35,33 @@ async function f_work(filtre) {
         } else if (filtre.value === 3 && work[i].category.id === 3) { // category, id 3 = "Hotels & restaurants"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
         }
+        i++;
+    }
+}
+
+
+//fonction pour afficher les projet dans le module
+async function f_mini_work() {
+    const module = document.querySelector(".edit_content");
+    const gallery = document.querySelector(".mini_work");
+    const work = await get_api("works");
+
+    // generer les travaux avec et sans les filtres
+    gallery.innerHTML = ""
+    i = 0;
+    while (i < work.length) {
+        const figure = document.createElement("figure");
+        figure.classList.add("mini_card");
+
+        const trashLink = document.createElement("a");
+        trashLink.classList.add("trash");
+        trashLink.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+        figure.style.backgroundImage = "url("+work[i].imageUrl+")";
+
+        figure.appendChild(trashLink);
+        gallery.appendChild(figure);
+
         i++;
     }
 }
@@ -77,6 +104,7 @@ btn_log.addEventListener("click", function() {
 // ouvrir la fenetre modal
 btn_edit.addEventListener("click", function() {
     popup_edit.style.display = "flex";
+    f_mini_work();
 });
 
 //fermer la fenetre modale
