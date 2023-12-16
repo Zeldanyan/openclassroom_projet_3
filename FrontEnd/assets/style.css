@@ -361,10 +361,18 @@ footer nav ul {
 .window_edit form {
 	display: flex;
     flex-direction: column;
+	margin: 0 105px;
 }
 
-.window_edit form input {
-	margin: 0 105px;
+.window_edit form .input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.window_edit form label {
+	margin: 21px 0 10px 0;
 }
 
 /*------------------------------------------------------------*\
