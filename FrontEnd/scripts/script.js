@@ -4,6 +4,9 @@
 async function get_api(link) {
     const api_link = await fetch(api+link);
     const json = await api_link.json();
+    if (link = "works") {
+        window.localStorage.setItem("works", json);
+    }
     return (json);
 }
 
@@ -43,11 +46,16 @@ async function f_work(filtre) {
 //fonction pour afficher les projet dans le module
 async function f_mini_work() {
     const module = document.querySelector(".edit_content");
-    const gallery = document.querySelector(".mini_work");
     const work = await get_api("works");
 
     // generer les travaux avec et sans les filtres
-    gallery.innerHTML = ""
+    module.innerHTML = '<a class="close"><i class="fa-solid fa-xmark"></i></a>' +
+		'<h3>Galerie photo</h3>' +
+		'<div class="mini_work"></div>' +
+		'<button class="button_module">Ajouter une photo</button>';
+    
+    const gallery = document.querySelector(".mini_work");
+    gallery.innerHTML = "";
     i = 0;
     while (i < work.length) {
         const figure = document.createElement("figure");
@@ -64,11 +72,23 @@ async function f_mini_work() {
 
         i++;
     }
+
+    // ajouter un element
+    document.querySelector(".button_module").addEventListener("click", function() {
+        popup_edit.style.display = "flex";
+    });
+
+    //fermer la fenetre modale
+    document.querySelector(".close").addEventListener("click", function() {
+        popup_edit.style.display = "none";
+    })
 }
 
 let i = 0;
 //doc api = http://localhost:5678/api-docs/
 const api = "http://localhost:5678/api/";
+let token = window.localStorage.getItem("token");
+
 const btn_filtre = [
     document.getElementById("menu_all"),
     document.getElementById("menu_objects"),
@@ -76,9 +96,9 @@ const btn_filtre = [
     document.getElementById("menu_HR")
 ];
 const btn_log = document.getElementById("log");
-let token = window.localStorage.getItem("token");
 const btn_edit = document.getElementById("edit");
 const popup_edit = document.getElementById("window_edit");
+
 token = "test";
 
 f_work(null);
@@ -104,10 +124,5 @@ btn_log.addEventListener("click", function() {
 // ouvrir la fenetre modal
 btn_edit.addEventListener("click", function() {
     popup_edit.style.display = "flex";
-    f_mini_work();
+    //f_mini_work();
 });
-
-//fermer la fenetre modale
-document.querySelector(".close").addEventListener("click", function() {
-    popup_edit.style.display = "none";
-})

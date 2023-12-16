@@ -337,6 +337,7 @@ footer nav ul {
 	border-radius: 60px;
 	height: 36px;
 	width: 236px;
+	cursor: pointer;
 }
 
 .window_edit .trash {
@@ -355,6 +356,15 @@ footer nav ul {
 	display: contents;
 	color: white;
 	font-size: 11px;
+}
+
+.window_edit form {
+	display: flex;
+    flex-direction: column;
+}
+
+.window_edit form input {
+	margin: 0 105px;
 }
 
 /*------------------------------------------------------------*\
