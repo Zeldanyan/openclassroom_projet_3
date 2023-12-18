@@ -98,7 +98,12 @@
 		<a class="close"><i class="fa-solid fa-xmark"></i></a>
 		<h3>Ajout photo</h3>
 		<form action="" method="post">
-			<input type="file" name="photo" id="photo" accept=".jpg, .png">
+			<div id="add_photo">
+				<i class="fa-regular fa-image"></i>
+				<label for="photo" class="btn_photo">+Ajouter photo</label>
+				<input type="file" name="photo" id="photo" accept=".jpg, .png">
+				<p>jpg, png : 4mo max</p>
+			</div>
 			<label for="titre">Titre</label>
 			<input type="text" name="titre" id="titre" class="input">
 			<label for="categorie">Catégorie</label>
@@ -107,6 +112,7 @@
 				<option value="2">2m</option>
 				<option value="3">3m</option>
 			</select>
+			<hr>
 			<input type="submit" class="button_module" value="Valider">
 		</form>
 	</div>
