@@ -75,13 +75,63 @@ async function f_mini_work() {
 
     // ajouter un element
     document.querySelector(".button_module").addEventListener("click", function() {
-        popup_edit.style.display = "flex";
+        f_add_work();
     });
 
     //fermer la fenetre modale
     document.querySelector(".close").addEventListener("click", function() {
         popup_edit.style.display = "none";
     })
+}
+
+// fonction pour ajouter un projet
+async function f_add_work() {
+    const module = document.querySelector(".edit_content");
+    const categ = await get_api("categories");
+    let html_txt = ""; // structure html du module pour l'ajout de projet
+
+    html_txt = '<a class="back"><i class="fa-solid fa-arrow-left"></i></a>' +
+    '<a class="close"><i class="fa-solid fa-xmark"></i></a>' +
+    '<h3>Ajout photo</h3>' +
+    '<form action="" method="post">' +
+        '<div id="add_photo">' +
+            '<i class="fa-regular fa-image"></i>' +
+            '<label for="photo" class="btn_photo">+Ajouter photo</label>' +
+            '<input type="file" name="photo" id="photo" accept=".jpg, .png">' +
+            '<p>jpg, png : 4mo max</p>' +
+        '</div>' +
+        '<label for="titre">Titre</label>' +
+        '<input type="text" name="titre" id="titre" class="input">' +
+        '<label for="categorie">Catégorie</label>' +
+        '<select name="categorie" id="categorie" class="input">';
+        
+    i = 0;
+    while (i < categ.length) {
+        html_txt += '<option value = '+ categ[i].name +'>'+ categ[i].name +'</option>';
+        i++;
+    }
+
+    html_txt += '</select>' +
+        '<hr>' +
+        '<input type="submit" class="button_module" value="Valider">' +
+    '</form>';
+
+    module.innerHTML = html_txt;
+
+    // précedent
+    document.querySelector(".back").addEventListener("click", function() {
+        f_mini_work();
+    });
+
+    //fermer la fenetre modale
+    document.querySelector(".close").addEventListener("click", function() {
+        popup_edit.style.display = "none";
+    })
+
+    // valider
+    document.querySelector(".button_module").addEventListener("click", function(event) {
+        event.preventDefault(); // empeche de recharger la page
+    });
 }
 
 let i = 0;
@@ -124,5 +174,5 @@ btn_log.addEventListener("click", function() {
 // ouvrir la fenetre modal
 btn_edit.addEventListener("click", function() {
     popup_edit.style.display = "flex";
-    //f_mini_work();
+    f_mini_work();
 });
