@@ -88,6 +88,7 @@ async function f_mini_work() {
 async function f_add_work() {
     const module = document.querySelector(".edit_content");
     const categ = await get_api("categories");
+    let new_img;
     let html_txt = ""; // structure html du module pour l'ajout de projet
 
     html_txt = '<a class="back"><i class="fa-solid fa-arrow-left"></i></a>' +
@@ -103,7 +104,8 @@ async function f_add_work() {
         '<label for="titre">Titre</label>' +
         '<input type="text" name="titre" id="titre" class="input">' +
         '<label for="categorie">Catégorie</label>' +
-        '<select name="categorie" id="categorie" class="input">';
+        '<select name="categorie" id="categorie" class="input">' +
+        '<option value = ""></option>';
         
     i = 0;
     while (i < categ.length) {
@@ -118,6 +120,9 @@ async function f_add_work() {
 
     module.innerHTML = html_txt;
 
+    document.querySelector(".button_module").style.backgroundColor = "#A7A7A7";
+    document.querySelector(".button_module").style.cursor = "no-drop";
+
     // précedent
     document.querySelector(".back").addEventListener("click", function() {
         f_mini_work();
@@ -128,9 +133,51 @@ async function f_add_work() {
         popup_edit.style.display = "none";
     })
 
+    // ajout photo
+    document.getElementById("photo").addEventListener("change", function() {
+        new_img = document.getElementById("photo").files[0];
+        const new_img_link = URL.createObjectURL(new_img);
+
+        if (new_img.size > 4*(1024 ** 2)) {
+            console.log("!!! max: 4mo !!!");
+            document.querySelector("#add_photo p").textContent = "erreur, fichier trop volumineux : 4mo max"
+            document.querySelector("#add_photo p").style.color = "red";
+            document.getElementById("add_photo").style.border = "1px solid red";
+        } else {
+            document.getElementById("add_photo").style.backgroundImage = "url(" + new_img_link + ")";
+            document.getElementById("add_photo").innerHTML = "";
+            document.querySelector(".button_module").style.backgroundColor = "#1D6154";
+            document.querySelector(".button_module").style.cursor = "pointer";
+            document.getElementById("add_photo").style.border = "none";
+        }
+    });
+
     // valider
     document.querySelector(".button_module").addEventListener("click", function(event) {
         event.preventDefault(); // empeche de recharger la page
+        const create_img = new_img;
+        const create_title = document.getElementById("titre").value;
+        const create_categ = document.getElementById("categorie").value;
+
+        document.getElementById("titre").style.border = "none";
+        document.getElementById("categorie").style.border = "none";
+        document.getElementById("add_photo").style.border = "none";
+
+        //verifier que tout est correctement completer
+        if (document.querySelector(".button_module").style.cursor == "pointer" && create_title !== "" && create_categ !== "") {
+            console.log("valider");
+        } else {
+
+            if (document.querySelector(".button_module").style.cursor != "pointer") {
+                document.getElementById("add_photo").style.border = "1px solid red";
+            }
+            if (create_title == "") {
+                document.getElementById("titre").style.border = "1px solid red";
+            }
+            if (create_categ == "") {
+                document.getElementById("categorie").style.border = "1px solid red";
+            }
+        }
     });
 }
 

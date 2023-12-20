@@ -391,6 +391,9 @@ footer nav ul {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .window_edit .fa-image {
