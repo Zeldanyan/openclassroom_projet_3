@@ -70,6 +70,9 @@ async function f_mini_work() {
         figure.appendChild(trashLink);
         gallery.appendChild(figure);
 
+        // supprimer projet
+        trashLink.addEventListener("click", f_delete_work(work[i].id, work[i].title));
+
         i++;
     }
 
@@ -81,7 +84,27 @@ async function f_mini_work() {
     //fermer la fenetre modale
     document.querySelector(".close").addEventListener("click", function() {
         popup_edit.style.display = "none";
-    })
+    });
+
+    
+}
+
+// fonction de suppression de projet
+function f_delete_work(suppr_id, suppr_title) {
+    return async function() {
+        const delete_response = await fetch(api + "works/" + suppr_id,{
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + token,
+            },
+        })
+        if (delete_response.ok) {
+            f_mini_work();
+            f_work(null);
+        } else {
+
+        }
+    }
 }
 
 // fonction pour ajouter un projet
@@ -131,7 +154,7 @@ async function f_add_work() {
     //fermer la fenetre modale
     document.querySelector(".close").addEventListener("click", function() {
         popup_edit.style.display = "none";
-    })
+    });
 
     // ajout photo
     document.getElementById("photo").addEventListener("change", function() {
@@ -171,7 +194,7 @@ async function f_add_work() {
             data.append("title", create_title);
             data.append("category", create_categ);
 
-            const data_response = await fetch("http://localhost:5678/api/works", { //envoie des donnée a l'api
+            const data_response = await fetch(api + "works", { //envoie des donnée a l'api
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + token,
