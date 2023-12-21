@@ -172,6 +172,12 @@ a#edit {
 
 }
 
+.gallery figure {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /*menu filtre*/
 .menu ul {
 	display: flex;
@@ -323,6 +329,7 @@ footer nav ul {
 	background-color: rgb(119, 119, 119);
 	margin-bottom: 25px;
 	background-size: cover;
+	background-position: center;
 }
 
 .window_edit .button_module {

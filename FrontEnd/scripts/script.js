@@ -31,11 +31,11 @@ async function f_work(filtre) {
     while (i < work.length) { 
         if (filtre === null || filtre.value === 0) { // category, tout les projets
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
-        } else if (filtre.value === 1 && work[i].category.id === 1) { // category, id 1 = "Objets"
+        } else if (filtre.value === 1 && work[i].categoryId === 1) { // category, id 1 = "Objets"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
-        } else if (filtre.value === 2 && work[i].category.id === 2) { // category, id 2 = "Appartements"
+        } else if (filtre.value === 2 && work[i].categoryId === 2) { // category, id 2 = "Appartements"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
-        } else if (filtre.value === 3 && work[i].category.id === 3) { // category, id 3 = "Hotels & restaurants"
+        } else if (filtre.value === 3 && work[i].categoryId === 3) { // category, id 3 = "Hotels & restaurants"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
         }
         i++;
@@ -109,7 +109,7 @@ async function f_add_work() {
         
     i = 0;
     while (i < categ.length) {
-        html_txt += '<option value = '+ categ[i].name +'>'+ categ[i].name +'</option>';
+        html_txt += '<option value = '+ categ[i].id +'>'+ categ[i].name +'</option>';
         i++;
     }
 
@@ -153,7 +153,7 @@ async function f_add_work() {
     });
 
     // valider
-    document.querySelector(".button_module").addEventListener("click", function(event) {
+    document.querySelector(".button_module").addEventListener("click", async function(event) {
         event.preventDefault(); // empeche de recharger la page
         const create_img = new_img;
         const create_title = document.getElementById("titre").value;
@@ -165,7 +165,27 @@ async function f_add_work() {
 
         //verifier que tout est correctement completer
         if (document.querySelector(".button_module").style.cursor == "pointer" && create_title !== "" && create_categ !== "") {
-            console.log("valider");
+            let data = new FormData();
+
+            data.append("image", create_img);
+            data.append("title", create_title);
+            data.append("category", create_categ);
+
+            const data_response = await fetch("http://localhost:5678/api/works", { //envoie des donnée a l'api
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token,
+                },
+                body: data,
+            });
+
+            if (data_response.ok) { // envoie reussi
+                popup_edit.style.display = "none";
+                f_work(null);
+            } else { // error
+                console.log("error:");
+                console.log(data_response);
+            }
         } else {
 
             if (document.querySelector(".button_module").style.cursor != "pointer") {
@@ -195,8 +215,6 @@ const btn_filtre = [
 const btn_log = document.getElementById("log");
 const btn_edit = document.getElementById("edit");
 const popup_edit = document.getElementById("window_edit");
-
-token = "test";
 
 f_work(null);
 btn_filtre[0].addEventListener("click", function() {f_work(btn_filtre[0]);});
