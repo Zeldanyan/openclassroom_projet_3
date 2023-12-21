@@ -2,12 +2,25 @@
 
 // function recupere reponse json d'une api
 async function get_api(link) {
-    const api_link = await fetch(api+link);
-    const json = await api_link.json();
-    if (link = "works") {
-        window.localStorage.setItem("works", json);
+    try {
+        const api_link = await fetch(api+link);
+
+        if (api_link.ok) {
+            const json = await api_link.json();
+            if (link === "works") {
+                window.localStorage.setItem("works", JSON.stringify(json));
+            }
+            return (json);
+        }
+    } catch (error) {
+        if (link === "works") {
+            const local_work = window.localStorage.getItem("works");
+            //const local_work_json = JSON.parse(local_work);
+            console.log("test");
+            //console.log(local_work_json);
+            return JSON.parse(local_work);
+        }
     }
-    return (json);
 }
 
 // function pour les projets
@@ -165,7 +178,7 @@ async function f_add_work() {
             console.log("!!! max: 4mo !!!");
             document.querySelector("#add_photo p").textContent = "erreur, fichier trop volumineux : 4mo max"
             document.querySelector("#add_photo p").style.color = "red";
-            document.getElementById("add_photo").style.border = "1px solid red";
+            document.getElementById("add_photo").style.border = "2px solid red";
         } else {
             document.getElementById("add_photo").style.backgroundImage = "url(" + new_img_link + ")";
             document.getElementById("add_photo").innerHTML = "";
@@ -212,13 +225,13 @@ async function f_add_work() {
         } else {
 
             if (document.querySelector(".button_module").style.cursor != "pointer") {
-                document.getElementById("add_photo").style.border = "1px solid red";
+                document.getElementById("add_photo").style.border = "2px solid red";
             }
             if (create_title == "") {
-                document.getElementById("titre").style.border = "1px solid red";
+                document.getElementById("titre").style.border = "2px solid red";
             }
             if (create_categ == "") {
-                document.getElementById("categorie").style.border = "1px solid red";
+                document.getElementById("categorie").style.border = "2px solid red";
             }
         }
     });
