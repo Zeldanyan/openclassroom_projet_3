@@ -17,7 +17,7 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li><a href="#portfolio">projets<a></li>
+			<li><a href="#portfolio">projets</a></li>
 			<li><a href="#contact">contact</a></li>
 			<li><a id="log" href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -25,7 +25,7 @@
 	</nav>
 </header>
 <main>
-	<section id="introduction">
+	<div id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		</figure>
@@ -35,7 +35,7 @@
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
-	</section>
+	</div>
 	<section id="portfolio">
 		<div class="header_portfolio">
 			<h2>Mes Projets</h2>
@@ -43,10 +43,10 @@
 		</div>
 		<div class="menu">
 			<ul>
-				<li id="menu_all" class="select" value="0">Tous</li>
-				<li id="menu_objects" value="1">Objets</li>
-				<li id="menu_apparts" value="2">Appartements</li>
-				<li id="menu_HR" value="3">Hôtels & restaurants</li>
+				<li id="menu_all" class="select" data-value="0">Tous</li>
+				<li id="menu_objects" data-value="1">Objets</li>
+				<li id="menu_apparts" data-value="2">Appartements</li>
+				<li id="menu_HR" data-value="3">Hôtels & restaurants</li>
 			</ul>
 		</div>
 		<div class="gallery">
@@ -81,10 +81,10 @@
 </footer>
 
 <!--
-/*------------------------------------------------------------*\
+/*____________________________________________________________*\
 |						fenetre module							\
 |						@zelda									/
-\*------------------------------------------------------------*/
+\*____________________________________________________________*/
 -->
 
 <div class="window_edit" id="window_edit">

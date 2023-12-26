@@ -40,15 +40,16 @@ async function f_work(filtre) {
 
     // generer les travaux avec et sans les filtres
     gallery.innerHTML = ""
+    
     i = 0;
     while (i < work.length) { 
-        if (filtre === null || filtre.value === 0) { // category, tout les projets
+        if (filtre === null || filtre.dataset.value == 0) { // category, tout les projets
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
-        } else if (filtre.value === 1 && work[i].categoryId === 1) { // category, id 1 = "Objets"
+        } else if (filtre.dataset.value == 1 && work[i].categoryId === 1) { // category, id 1 = "Objets"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
-        } else if (filtre.value === 2 && work[i].categoryId === 2) { // category, id 2 = "Appartements"
+        } else if (filtre.dataset.value == 2 && work[i].categoryId === 2) { // category, id 2 = "Appartements"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
-        } else if (filtre.value === 3 && work[i].categoryId === 3) { // category, id 3 = "Hotels & restaurants"
+        } else if (filtre.dataset.value == 3 && work[i].categoryId === 3) { // category, id 3 = "Hotels & restaurants"
             gallery.innerHTML += "<figure><img src=" + work[i].imageUrl + " alt="+ work[i].title +"><figcaption>"+ work[i].title +"</figcaption></figure>";
         }
         i++;
