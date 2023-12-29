@@ -19,12 +19,8 @@ async function f_login () {
         console.log(reponse_json.message);
         document.getElementById("email").style.border ="2px solid red";
         document.getElementById("password").style.border ="2px solid red";
-        if (reponse.status === 404) {
-            document.getElementById("code_fail").innerHTML ="Erreur<br>dans l’identifiant ou le mot de passe";
-        }
-        if (reponse.status === 401) {
-            document.getElementById("code_fail").innerHTML ="Non autorisé";
-        }
+        document.getElementById("code_fail").innerHTML ="Erreur<br>dans l’identifiant ou le mot de passe"; //message erreur
+        
     }
 }
 

@@ -15,9 +15,7 @@ async function get_api(link) {
     } catch (error) {
         if (link === "works") {
             const local_work = window.localStorage.getItem("works");
-            //const local_work_json = JSON.parse(local_work);
             console.log("test");
-            //console.log(local_work_json);
             return JSON.parse(local_work);
         }
     }
@@ -54,6 +52,7 @@ async function f_work(filtre) {
         }
         i++;
     }
+    btn_filtre_save = filtre;
 }
 
 
@@ -99,7 +98,6 @@ async function f_mini_work() {
     document.querySelector(".close").addEventListener("click", function() {
         popup_edit.style.display = "none";
     });
-
     
 }
 
@@ -114,10 +112,19 @@ function f_delete_work(suppr_id, suppr_title) {
         })
         if (delete_response.ok) {
             f_mini_work();
-            f_work(null);
-        } else {
-
+            f_work(btn_filtre_save);
         }
+    }
+}
+
+// fonction pret a valider
+async function f_add_confirm() {
+    if (document.getElementById("add_photo").innerHTML === "" && document.getElementById("titre").value !== "" && document.getElementById("categorie").value !== "") {
+        document.querySelector(".button_module").style.backgroundColor = "#1D6154";
+        document.querySelector(".button_module").style.cursor = "pointer";
+    } else {
+        document.querySelector(".button_module").style.backgroundColor = "#A7A7A7";
+        document.querySelector(".button_module").style.cursor = "no-drop";
     }
 }
 
@@ -183,58 +190,51 @@ async function f_add_work() {
         } else {
             document.getElementById("add_photo").style.backgroundImage = "url(" + new_img_link + ")";
             document.getElementById("add_photo").innerHTML = "";
-            document.querySelector(".button_module").style.backgroundColor = "#1D6154";
-            document.querySelector(".button_module").style.cursor = "pointer";
             document.getElementById("add_photo").style.border = "none";
+            f_add_confirm(new_img);
         }
     });
 
-    // valider
+    document.getElementById("titre").addEventListener("change", function() {
+        f_add_confirm(new_img);
+    });
+
+    document.getElementById("categorie").addEventListener("change", function() {
+        f_add_confirm(new_img);
+    });
+
+    // VALIDER
     document.querySelector(".button_module").addEventListener("click", async function(event) {
         event.preventDefault(); // empeche de recharger la page
+
         const create_img = new_img;
         const create_title = document.getElementById("titre").value;
         const create_categ = document.getElementById("categorie").value;
-
-        document.getElementById("titre").style.border = "none";
-        document.getElementById("categorie").style.border = "none";
-        document.getElementById("add_photo").style.border = "none";
-
-        //verifier que tout est correctement completer
-        if (document.querySelector(".button_module").style.cursor == "pointer" && create_title !== "" && create_categ !== "") {
-            let data = new FormData();
-
-            data.append("image", create_img);
-            data.append("title", create_title);
-            data.append("category", create_categ);
-
-            const data_response = await fetch(api + "works", { //envoie des donnée a l'api
-                method: "POST",
-                headers: {
-                    "Authorization": "Bearer " + token,
-                },
-                body: data,
-            });
-
-            if (data_response.ok) { // envoie reussi
-                popup_edit.style.display = "none";
-                f_work(null);
-            } else { // error
-                console.log("error:");
-                console.log(data_response);
+    
+            //reverifier que tout est correctement completer
+            if (document.getElementById("add_photo").innerHTML === "" && create_title !== "" && create_categ !== "") {
+                let data = new FormData();
+    
+                data.append("image", create_img);
+                data.append("title", create_title);
+                data.append("category", create_categ);
+    
+                const data_response = await fetch(api + "works", { //envoie des donnée a l'api
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                    },
+                    body: data,
+                });
+    
+                if (data_response.ok) { // envoie reussi
+                    popup_edit.style.display = "none";
+                    f_work(btn_filtre_save);
+                } else { // error
+                    console.log("error:");
+                    console.log(data_response);
+                }
             }
-        } else {
-
-            if (document.querySelector(".button_module").style.cursor != "pointer") {
-                document.getElementById("add_photo").style.border = "2px solid red";
-            }
-            if (create_title == "") {
-                document.getElementById("titre").style.border = "2px solid red";
-            }
-            if (create_categ == "") {
-                document.getElementById("categorie").style.border = "2px solid red";
-            }
-        }
     });
 }
 
@@ -249,6 +249,7 @@ const btn_filtre = [
     document.getElementById("menu_apparts"),
     document.getElementById("menu_HR")
 ];
+let btn_filtre_save = null;
 const btn_log = document.getElementById("log");
 const btn_edit = document.getElementById("edit");
 const popup_edit = document.getElementById("window_edit");
@@ -259,7 +260,7 @@ btn_filtre[1].addEventListener("click", function() {f_work(btn_filtre[1]);});
 btn_filtre[2].addEventListener("click", function() {f_work(btn_filtre[2]);});
 btn_filtre[3].addEventListener("click", function() {f_work(btn_filtre[3]);});
 
-if (token !== null) {
+if (token !== null) { // verifier le token
     btn_log.textContent = "logout";
     btn_log.href = "#";
     btn_edit.style.display = "flex";
