@@ -264,6 +264,8 @@ if (token !== null) { // verifier le token
     btn_log.textContent = "logout";
     btn_log.href = "#";
     btn_edit.style.display = "flex";
+    document.querySelector(".menu").style.display = "none";
+    document.querySelector("body").style.paddingTop = "59px";
 }
 
 // log out
