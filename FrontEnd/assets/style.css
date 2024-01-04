@@ -66,14 +66,13 @@ table {
 /** end reset css**/
 
 div.edition {
-	display: block;
+	display: none;
 	background-color: black;
 	height: 59px;
 	width: 100%;
 	left: 0;
 	top: 0;
 	position: fixed;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
